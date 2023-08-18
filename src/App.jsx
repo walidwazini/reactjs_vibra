@@ -1,16 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import Explore from './pages/Explore'
+import { Routes, Route } from 'react-router-dom'
 
 const App = () => {
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </>
+    <div className='relative flex' >
+      {/* ___SIDEBAR___ */}
+      <div>Sidebar</div>
+
+      {/* ___SEARCH BAR___ */}
+      <div className='flex-1 flex flex-col bg-red-300 ' >
+        <div>Search Bar</div>
+
+        <div className='px-6 bg-blue-700' >
+          <div className='flex-1 h-fit pb-40' >
+            <Routes>
+              <Route path="/" element={<Explore />} />
+
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
