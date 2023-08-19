@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import { SongCard } from '../components'
+
 const genres = [
   { title: 'Pop', value: 'POP' },
   { title: 'Hip-Hop', value: 'HIP_HOP_RAP' },
@@ -7,22 +9,13 @@ const genres = [
   { title: 'Electronic', value: 'ELECTRONIC' },
   { title: 'Soul', value: 'SOUL_RNB' },
 ]
-
-const dummySongs = [
-  { title: 'Kaikai Kitan' },
-  { title: 'STARS' },
-  { title: 'Rolling Stars' },
-  { title: 'Harukaze' },
-  { title: 'Blue Bird' },
-]
-
 const Explore = () => {
   const [theTracks, setTheTracks] = useState([])
   const genreTitle = 'Jazz'
 
   useEffect(() => {
     fetch(
-      'https://shazam-core7.p.rapidapi.com/charts/get-top-songs-in_world_by_genre?genre=POP&limit=3',
+      'https://shazam-core7.p.rapidapi.com/charts/get-top-songs-in_world_by_genre?genre=POP&limit=6',
       {
         method: 'GET',
         headers: {
@@ -33,7 +26,6 @@ const Explore = () => {
     )
       .then(res => res.json())
       .then(res => {
-        // console.log(res.tracks)
         setTheTracks(res.tracks)
         console.log(theTracks)
       })
@@ -57,9 +49,15 @@ const Explore = () => {
       </div>
       <div className='flex flex-wrap sm:justify-start justify-center gap-8' >
         {theTracks?.map((song, i) => {
-          console.log(song.title)
           return (
-            <div key={i} >{song.title}</div>
+
+            <SongCard
+              key={i}
+              song={song}
+              imgUrl={song.images.background}
+              title={song.title}
+              singer={song.subtitle}
+            />
           )
         })}
       </div>
