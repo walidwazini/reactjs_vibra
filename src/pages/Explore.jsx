@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 const genres = [
   { title: 'Pop', value: 'POP' },
@@ -9,15 +9,37 @@ const genres = [
 ]
 
 const dummySongs = [
-  {title: 'Kaikai Kitan'},
-  {title: 'STARS'},
-  {title: 'Rolling Stars'},
-  {title: 'Harukaze'},
-  {title: 'Blue Bird'},
+  { title: 'Kaikai Kitan' },
+  { title: 'STARS' },
+  { title: 'Rolling Stars' },
+  { title: 'Harukaze' },
+  { title: 'Blue Bird' },
 ]
 
 const Explore = () => {
+  const [theTracks, setTheTracks] = useState([])
   const genreTitle = 'Jazz'
+
+  useEffect(() => {
+    fetch(
+      'https://shazam-core7.p.rapidapi.com/charts/get-top-songs-in_world_by_genre?genre=POP&limit=3',
+      {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': import.meta.env.VITE_SHAZAM_CORE_RAPID_API_KEY,
+          'X-RapidAPI-Host': 'shazam-core7.p.rapidapi.com'
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res.tracks)
+        setTheTracks(res.tracks)
+        console.log(theTracks)
+      })
+      .catch(err => console.log(err))
+  }, [])
+
 
   return (
     <div className='flex flex-col' >
@@ -28,15 +50,18 @@ const Explore = () => {
         <select
           className='bg-black text-gray-400 p-3 text-sm rounded-md outline-none sm:mt-0 mt-5 '
         >
-         {genres.map(genre => (
-          <option key={genre.value} value={genre.value} >{genre.title}</option>
-         ))}
+          {genres.map(genre => (
+            <option key={genre.value} value={genre.value} >{genre.title}</option>
+          ))}
         </select>
       </div>
       <div className='flex flex-wrap sm:justify-start justify-center gap-8' >
-          {dummySongs.map((song,i) => (
+        {theTracks?.map((song, i) => {
+          console.log(song.title)
+          return (
             <div key={i} >{song.title}</div>
-          ))}
+          )
+        })}
       </div>
     </div>
   )
