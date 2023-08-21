@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+import {  useGetTopSongByGenreQuery } from '../store/services/shazamCore'
 import { SongCard } from '../components'
 
 const genres = [
@@ -13,25 +14,10 @@ const Explore = () => {
   const [theTracks, setTheTracks] = useState([])
   const genreTitle = 'Jazz'
 
-  useEffect(() => {
-    fetch(
-      'https://shazam-core7.p.rapidapi.com/charts/get-top-songs-in_world_by_genre?genre=POP&limit=6',
-      {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': import.meta.env.VITE_SHAZAM_CORE_RAPID_API_KEY,
-          'X-RapidAPI-Host': 'shazam-core7.p.rapidapi.com'
-        }
-      }
-    )
-      .then(res => res.json())
-      .then(res => {
-        setTheTracks(res.tracks)
-        console.log(theTracks)
-      })
-      .catch(err => console.log(err))
-  }, [])
-
+  const queryResponse = useGetTopSongByGenreQuery('HIP_HOP_RAP')
+  const { data, isFetching, isLoading, isError } = queryResponse
+  
+  console.log(queryResponse)
 
   return (
     <div className='flex flex-col' >
@@ -48,9 +34,8 @@ const Explore = () => {
         </select>
       </div>
       <div className='flex flex-wrap sm:justify-start justify-center gap-8' >
-        {theTracks?.map((song, i) => {
+        {data?.tracks?.map((song, i) => {
           return (
-
             <SongCard
               key={i}
               song={song}
