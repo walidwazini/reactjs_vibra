@@ -17,11 +17,6 @@ export const shazamCoreApi = createApi({
   })
 })
 
-'https://shazam-core7.p.rapidapi.com/charts/get-top-songs-in-world?limit=10'
-
-'https://shazam-core7.p.rapidapi.com/charts/get-top-songs-in_world_by_genre?genre=POP&limit=6'
-
-
 export const {
   useGetTopSongsInWorldQuery,
   useGetTopSongByGenreQuery,
