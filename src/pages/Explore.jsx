@@ -10,7 +10,7 @@ const Explore = () => {
   const queryResponse = useGetTopSongByGenreQuery('HIP_HOP_RAP')
   const { data, isFetching, isError } = queryResponse
 
-  console.log(queryResponse)
+  console.log(queryResponse.data?.tracks)
 
   if (isFetching) return <Loader title={'Loading songs..'} />
 
@@ -32,17 +32,13 @@ const Explore = () => {
         </select>
       </div>
       <div className='flex flex-wrap sm:justify-start justify-center gap-8' >
-        {data?.tracks?.map((song, i) => {
-          return (
-            <SongCard
-              key={i}
-              song={song}
-              imgUrl={song.images.background}
-              title={song.title}
-              singer={song.subtitle}
-            />
-          )
-        })}
+        {data?.tracks?.map((song) => (
+          <SongCard
+            key={song.key}
+            song={song}
+            data={data}
+          />
+        ))}
       </div>
     </div>
   )
