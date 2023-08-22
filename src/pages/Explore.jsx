@@ -7,11 +7,9 @@ import { SongCard, Loader, Error } from '../components'
 const Explore = () => {
   const genreTitle = 'Hip Hop'
 
-  const queryResponse = useGetTopSongByGenreQuery('HIP_HOP_RAP')
+  const queryResponse = useGetTopSongByGenreQuery('POP')
   const { data, isFetching, isError } = queryResponse
-
-  console.log(queryResponse.data?.tracks)
-
+  // console.log(queryResponse.data?.tracks)
   if (isFetching) return <Loader title={'Loading songs..'} />
 
   if (isError) return <Error />
@@ -32,9 +30,10 @@ const Explore = () => {
         </select>
       </div>
       <div className='flex flex-wrap sm:justify-start justify-center gap-8' >
-        {data?.tracks?.map((song) => (
+        {data?.tracks?.map((song,index) => (
           <SongCard
             key={song.key}
+            index={index}
             song={song}
             data={data}
           />

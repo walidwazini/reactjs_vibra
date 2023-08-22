@@ -1,13 +1,14 @@
 import viteLogo from '/vite.svg'
 import Explore from './pages/Explore'
 import { Routes, Route } from 'react-router-dom'
+import Sidebar from './components/Sidebar'
 
 const App = () => {
 
   return (
     <div className='relative flex' >
       {/* ___SIDEBAR___ */}
-      <div>Sidebar</div>
+      <Sidebar />
 
       {/* ___SEARCH BAR___ */}
       <div className='flex-1 flex flex-col bg-red-300 ' >
