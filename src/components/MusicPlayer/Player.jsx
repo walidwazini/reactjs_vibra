@@ -5,7 +5,7 @@ const Player = ({
   seekTime, onEnded, onTimeUpdate, onLoadedData
 }) => {
 
-  console.log(activeSong)
+  // console.log(activeSong)
 
   return (
 
