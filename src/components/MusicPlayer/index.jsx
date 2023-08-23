@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Controls from './Controls'
 import Seekbar from './Seekbar'
 import Player from './Player'
 import VolumeBar from './VolumeBar'
+import { playPause } from '../../store/features/playerSlice'
 
 const MusicPlayer = () => {
-  const { activeSong, isActive } = useSelector(state => state.player)
+  const { activeSong, isActive, isPlaying } = useSelector(state => state.player)
   const dispatch = useDispatch()
 
+  const [duration, setDuration] = useState(0)
+  const [seekTime, setSeekTime] = useState(0);
+  const [appTime, setAppTime] = useState(0);
+  const [volume, setVolume] = useState(0.2)
+
   const handlePlayPause = () => {
+    if (!isActive) return
+
+    if (isPlaying) {
+      dispatch(playPause(false))
+    } else {
+      dispatch(playPause(true))
+    }
   }
 
 
@@ -33,11 +46,37 @@ const MusicPlayer = () => {
       </div>
 
       <div className='flex-1 flex flex-col items-center justify-center' >
-        <Controls />
-        <Seekbar />
-        <Player />
+        <Controls
+          isActive={isActive}
+          isPlaying={isPlaying}
+          handlePlayPause={handlePlayPause}
+        />
+        <Seekbar
+          value={appTime}
+          min={'0'}
+          max={duration}
+          onInput={event => setSeekTime(event.target.value)}
+          setSeekTime={setSeekTime}
+          appTime={appTime}
+        />
+        <Player
+          activeSong={activeSong}
+          volume={volume}
+          isPlaying={isPlaying}
+          seekTime={seekTime}
+          onTimeUpdate={ev => setAppTime(ev.target.currentTime)}
+          onLoadedData={ev => setDuration(ev.target.duration)}
+        />
       </div>
-      <VolumeBar />
+      <VolumeBar
+        value={volume}
+        min={'0'} max={'1'}
+        onChange={(ev) => {
+          console.log(ev.target.volume)
+          setVolume(ev.target.volume)
+        }}
+        setVolume={setVolume} 
+        />
     </div>
   )
 }

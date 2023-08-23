@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import {
   BsFillVolumeUpFill, BsVolumeDownFill,
   BsFillVolumeMuteFill
 } from 'react-icons/bs';
 
 
-const VolumeBar = ({ value, onChange, min, max }) => {
+const VolumeBar = ({ value, onChange, min, max, setVolume }) => {
+
+  const audioRef = useRef()
+
+  useEffect(() => {
+    audioRef.current.volume = value;
+  }, [value]);
 
   return (
     <div className="hidden lg:flex flex-1 items-center justify-end">
-      <BsFillVolumeUpFill size={25} color="#FFF" onClick={() => { }} />
-      <BsVolumeDownFill size={25} color="#FFF" onClick={() => { }} />
+      {value <= 1 && value > 0.5 && <BsFillVolumeUpFill size={25} color="white" onClick={() => setVolume(0)} />}
+      {value <= 0.5 && value > 0 && <BsVolumeDownFill size={25} color="white" onClick={() => setVolume(0)} />}
+      {value === 0 && <BsFillVolumeMuteFill size={25} color="#FFF" onClick={() => setVolume(1)} />}
       <input
+        ref={audioRef}
         type="range"
         step="any"
         value={value}
