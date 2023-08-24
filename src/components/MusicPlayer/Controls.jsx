@@ -14,7 +14,7 @@ const Controls = ({
         onClick={() => { }}
         className="hidden sm:block cursor-pointer"
       />
-      <MdSkipPrevious onClick={() => { }} size={30} color="#FFF" className="cursor-pointer" />
+      <MdSkipPrevious onClick={handlePrevSong} size={30} color="#FFF" className="cursor-pointer" />
       {isPlaying ? (
         <BsFillPauseFill
           size={45}

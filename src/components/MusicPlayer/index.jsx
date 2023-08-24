@@ -5,7 +5,7 @@ import Controls from './Controls'
 import Seekbar from './Seekbar'
 import Player from './Player'
 import VolumeBar from './VolumeBar'
-import { playPause, nextSong } from '../../store/features/playerSlice'
+import { playPause, nextSong, prevSong } from '../../store/features/playerSlice'
 
 const MusicPlayer = () => {
   const { activeSong, isActive, isPlaying, currentSongs, currentIndex } = useSelector(state => state.player)
@@ -27,13 +27,23 @@ const MusicPlayer = () => {
       dispatch(playPause(false))
     } else {
       dispatch(playPause(true))
-    } 
+    }
   }
 
   const nextSongHandler = () => {
     dispatch(playPause(false))
     // We used this operation to get value '0' when at the final song of the tracks(array)
     dispatch(nextSong((currentIndex + 1) % currentSongs.length))
+  }
+
+  const prevSongHandler = () => {
+    dispatch(playPause(false))
+
+    if (currentIndex === 0) {
+      dispatch(prevSong(currentSongs.length - 1))
+    } else {
+      dispatch(prevSong(currentIndex - 1))
+    }
   }
 
 
@@ -61,6 +71,7 @@ const MusicPlayer = () => {
           isPlaying={isPlaying}
           handlePlayPause={handlePlayPause}
           handleNextSong={nextSongHandler}
+          handlePrevSong={prevSongHandler}
         />
         <Seekbar
           value={appTime}
