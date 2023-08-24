@@ -4,7 +4,7 @@ import { BsArrowRepeat, BsFillPauseFill, BsFillPlayFill, BsShuffle } from 'react
 
 
 const Controls = ({
-  isPlaying, isActive, handlePlayPause,
+  isPlaying,handlePlayPause, handleNextSong, handlePrevSong
 }) => {
   return (
     <div className='flex items-center justify-around md:w-36 lg:w-52 2xl:w-80' >
@@ -28,7 +28,7 @@ const Controls = ({
           onClick={handlePlayPause} className="cursor-pointer"
         />
       )}
-      <MdSkipNext size={30} color="#FFF" className="cursor-pointer" onClick={() => { }} />
+      <MdSkipNext onClick={handleNextSong} size={30} color="#FFF" className="cursor-pointer" />
       <BsShuffle size={20} color={'white'} onClick={() => { }} className="hidden sm:block cursor-pointer" />
     </div>
   )
