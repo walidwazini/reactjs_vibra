@@ -3,7 +3,7 @@ import Explore from './pages/Explore'
 import { Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { Sidebar, MusicPlayer } from './components'
+import { Sidebar, MusicPlayer, TopPlay } from './components'
 
 const App = () => {
   const { activeSong } = useSelector(state => state.player)
@@ -12,15 +12,17 @@ const App = () => {
     <div className='relative flex' >
       {/* ___SIDEBAR___ */}
       <Sidebar />
-
       {/* ___SEARCH BAR___ */}
-      <div className='flex-1 flex flex-col bg-red-300 ' >
+      <div className='flex-1 flex flex-col bg-blue-700 ' >
         <div>Search Bar</div>
-        <div className='px-6 bg-blue-700 max-h-full ' >
+        <div className='px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse' >
           <div className='flex-1 h-fit pb-40' >
             <Routes>
               <Route path="/" element={<Explore />} />
             </Routes>
+          </div>
+          <div>
+            <TopPlay />
           </div>
         </div>
       </div>

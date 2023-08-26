@@ -26,6 +26,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, index }) => {
             song={song}
             handlePlay={playHandler}
             handlePause={pauseHandler}
+            size={70}
           />
         </div>
         <img src={song.images.background} alt="song_cover" className='rounded-lg w-full h-full' />
