@@ -15,6 +15,8 @@ const MusicPlayer = () => {
   const [seekTime, setSeekTime] = useState(0);
   const [appTime, setAppTime] = useState(0);
   const [volume, setVolume] = useState(0.10)
+  const [repeat, setRepeat] = useState(false)
+  const [shuffle, setShuffle] = useState(false)
 
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
@@ -32,8 +34,13 @@ const MusicPlayer = () => {
 
   const nextSongHandler = () => {
     dispatch(playPause(false))
-    // We used this operation to get value '0' when at the final song of the tracks(array)
-    dispatch(nextSong((currentIndex + 1) % currentSongs.length))
+
+    if (shuffle) {
+      dispatch(nextSong(Math.floor(Math.random() * currentSongs.length)))
+    } else {
+      // We used this operation to get value '0' when at the final song of the tracks(array)
+      dispatch(nextSong((currentIndex + 1) % currentSongs.length))
+    }
   }
 
   const prevSongHandler = () => {
@@ -72,6 +79,10 @@ const MusicPlayer = () => {
           handlePlayPause={handlePlayPause}
           handleNextSong={nextSongHandler}
           handlePrevSong={prevSongHandler}
+          repeat={repeat}
+          setRepeat={setRepeat}
+          shuffle={shuffle}
+          setShuffle={setShuffle}
         />
         <Seekbar
           value={appTime}
