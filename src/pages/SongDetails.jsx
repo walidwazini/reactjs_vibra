@@ -24,7 +24,7 @@ const SongDetails = () => {
   const pauseHandler = () => dispatch(playPause(false))
 
   const playHandler = (song, index) => {
-    dispatch(setActiveSong({ song, songData, index }))
+    dispatch(setActiveSong({ song, recomData, index }))
     dispatch(playPause(true))
   }
 
@@ -65,7 +65,7 @@ const SongDetails = () => {
         )} */}
         {recomData && (
           <RecomSongs
-            data={recomData?.tracks}
+            data={recomData}
             isPlaying={isPlaying}
             activeSong={activeSong}
             handlePause={pauseHandler}

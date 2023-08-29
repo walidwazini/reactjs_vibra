@@ -18,11 +18,9 @@ const MusicPlayer = () => {
   const [repeat, setRepeat] = useState(false)
   const [shuffle, setShuffle] = useState(false)
 
-  // useEffect(() => {
-  //   if (currentSongs.length) dispatch(playPause(true));
-  // }, [currentIndex]);
-
-  // console.log(currentSongs)
+  useEffect(() => {
+    if (currentSongs.length) dispatch(playPause(true));
+  }, [currentIndex]);
 
   const handlePlayPause = () => {
     if (!isActive) return
