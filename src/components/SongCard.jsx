@@ -33,10 +33,11 @@ const SongCard = ({ song, isPlaying, activeSong, data, index }) => {
       </div>
       <div className='mt-4 flex flex-col' >
         <p className='font-semibold text-lg truncate text-white ' >
-          <button onClick={() => console.log(song?.key)} >
-            {/* <Link to={`/songs/${song.key}`} ></Link> */}
+          {/* <button onClick={() => console.log(song?.key)} > */}
+          <Link to={`/songs/${song.key}`} >
             {song.title}
-          </button>
+          </Link>
+          {/* </button> */}
         </p>
         <p className="text-sm truncate text-gray-300 mt-1">
           {/* <Link to={song.artists ? `/artists/${song?.artist[0]?.adamid}` : `/top-artists`} ></Link> */}

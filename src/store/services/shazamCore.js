@@ -13,11 +13,13 @@ export const shazamCoreApi = createApi({
   }),
   endpoints: builder => ({
     getTopSongsInWorld: builder.query({ query: () => '/charts/get-top-songs-in-world?limit=10' }),
-    getTopSongByGenre: builder.query({ query: (genreTerm) => `/charts/get-top-songs-in_world_by_genre?genre=${genreTerm}&limit=6` })
+    getTopSongByGenre: builder.query({ query: (genreTerm) => `/charts/get-top-songs-in_world_by_genre?genre=${genreTerm}&limit=6` }),
+    getSongDetails : builder.query({query: (songId) => `/songs/get_details?id=${songId}` })
   })
 })
 
 export const {
   useGetTopSongsInWorldQuery,
   useGetTopSongByGenreQuery,
+  useGetSongDetailsQuery,
 } = shazamCoreApi

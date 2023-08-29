@@ -1,7 +1,7 @@
 import viteLogo from '/vite.svg'
-import Explore from './pages/Explore'
 import { Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Explore, SongDetails } from './pages'
 
 import { Sidebar, MusicPlayer, TopPlay } from './components'
 
@@ -19,10 +19,11 @@ const App = () => {
           <div className='flex-1 h-fit pb-40' >
             <Routes>
               <Route path="/" element={<Explore />} />
+              <Route path="/songs/:songId" element={<SongDetails />} />
             </Routes>
           </div>
           <div>
-            <TopPlay />
+            {/* <TopPlay /> */}
           </div>
         </div>
       </div>
