@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setActiveSong, playPause } from '../store/features/playerSlice'
-import { useGetSongDetailsQuery } from '../store/services/shazamCore'
-import DetailsHeader from '../components/DetailsHeader';
+import { useGetSongDetailsQuery, useGetRecommendSongsQuery } from '../store/services/shazamCore'
+import { Loader, DetailsHeader, Error } from '../components'
 
 const SongDetails = () => {
   const divRef = useRef()
@@ -12,11 +12,22 @@ const SongDetails = () => {
   const { activeSong, isPlaying } = useSelector(state => state.player)
 
   const { data: songData, isFetching, isError } = useGetSongDetailsQuery(songId)
-  // console.log(songData)
+  // const res = useGetRecommendSongsQuery(songId)
+  const {
+    data: recomData,
+    isFetching: isFetRecom,
+    isError: recomError
+  } = useGetRecommendSongsQuery(songId)
 
-  useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: 'smooth' })
-  })
+  // useEffect(() => {
+  //   divRef.current.scrollIntoView({ behavior: 'smooth' })
+  // })
+
+  if (isFetching || isFetRecom) return (
+    <Loader title={'Searching song details'} />
+  )
+
+  if (isError) return <Error />
 
   return (
     <div ref={divRef} className="flex flex-col">
@@ -34,8 +45,16 @@ const SongDetails = () => {
             )}
         </div>
       </div>
-
-
+      <div className='flex flex-col m-5' >
+        {recomData && (
+          recomData?.tracks.map((item, i) => (
+            <div className='mt-2 text-white text-xl' key={item?.key}  >
+              <span>{i + 1}</span>
+              <span  >{item?.title}</span>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   )
 }

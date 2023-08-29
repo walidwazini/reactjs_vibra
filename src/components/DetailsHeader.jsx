@@ -4,7 +4,7 @@ import { BiArrowBack } from 'react-icons/bi'
 
 
 const DetailsHeader = ({ songData, artistId, artistData }) => {
-  console.log(songData)
+  // console.log(songData)
   const navigate = useNavigate()
   return (
     <div className="relative w-full flex flex-col">
