@@ -32,7 +32,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, index }) => {
         <img src={song.images.background} alt="song_cover" className='rounded-lg w-full h-full' />
       </div>
       <div className='mt-4 flex flex-col' >
-        <p className='font-semibold text-lg truncate text-white ' >
+        <p className='font-semibold text-lg truncate text-white hover:underline hover:text-slate-300 ' >
           {/* <button onClick={() => console.log(song?.key)} > */}
           <Link to={`/songs/${song.key}`} >
             {song.title}
