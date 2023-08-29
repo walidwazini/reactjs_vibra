@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActiveSong, playPause } from '../store/features/playerSlice'
 import { useGetSongDetailsQuery, useGetRecommendSongsQuery } from '../store/services/shazamCore'
 import { Loader, DetailsHeader, Error } from '../components'
+import RecomSongs from '../components/RecomSongs';
 
 const SongDetails = () => {
   const divRef = useRef()
+  const dispatch = useDispatch()
   const { songId } = useParams()
   const { activeSong, isPlaying } = useSelector(state => state.player)
 
@@ -18,6 +20,13 @@ const SongDetails = () => {
     isFetching: isFetRecom,
     isError: recomError
   } = useGetRecommendSongsQuery(songId)
+
+  const pauseHandler = () => dispatch(playPause(false))
+
+  const playHandler = (song, index) => {
+    dispatch(setActiveSong({ song, songData, index }))
+    dispatch(playPause(true))
+  }
 
   // useEffect(() => {
   //   divRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -46,13 +55,22 @@ const SongDetails = () => {
         </div>
       </div>
       <div className='flex flex-col m-5' >
-        {recomData && (
+        {/* {recomData && (
           recomData?.tracks.map((item, i) => (
             <div className='mt-2 text-white text-xl' key={item?.key}  >
               <span>{i + 1}</span>
               <span  >{item?.title}</span>
             </div>
           ))
+        )} */}
+        {recomData && (
+          <RecomSongs
+            data={recomData?.tracks}
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            handlePause={pauseHandler}
+            handlePlay={playHandler}
+          />
         )}
       </div>
     </div>
