@@ -9,7 +9,21 @@ const RecomSongs = ({
     <div className='flex flex-col' >
       <h1 className="font-bol text-3xl text-white">Recommended Songs :</h1>
       <div className="mt-6 w-full flex flex-col">
-        {data?.tracks.map((song, i) => (
+        {/*  For Artist Page  */}
+        {artistId && data?.map((song, i) => (
+          <SongBar
+            key={song?.artists ? `${song?.artists[0].adamid}-${song?.key}-${i}` : `N/A-${song?.key}-${i}`}
+            song={song}
+            i={i}
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            handlePauseClick={handlePause}
+            handlePlayClick={handlePlay}
+            artistId={artistId}
+          />
+        ))}
+        {/* For Song Details Page  */}
+        {!artistId && data?.tracks.map((song, i) => (
           <SongBar
             // ! There a song that dont have artists key and  
             key={song?.artists ? `${song?.artists[0].adamid}-${song?.key}-${i}` : `N/A-${song?.key}-${i}`}
