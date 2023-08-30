@@ -40,8 +40,9 @@ const SongCard = ({ song, isPlaying, activeSong, data, index }) => {
           {/* </button> */}
         </p>
         <p className="text-sm truncate text-gray-300 mt-1">
-          {/* <Link to={song.artists ? `/artists/${song?.artist[0]?.adamid}` : `/top-artists`} ></Link> */}
-          {song.subtitle}
+          <Link to={song.artists ? `/artist/${song?.artists[0]?.adamid}` : `/top-artists`} >
+            {song.subtitle}
+          </Link>
         </p>
       </div>
     </div>
