@@ -29,7 +29,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, index }) => {
             size={70}
           />
         </div>
-        <img src={song.images.background} alt="song_cover" className='rounded-lg w-full h-full' />
+        <img src={song.images.coverart} alt="song_cover" className='rounded-lg w-full h-full' />
       </div>
       <div className='mt-4 flex flex-col' >
         <p className='font-semibold text-lg truncate text-white hover:underline hover:text-slate-300 ' >
@@ -39,7 +39,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, index }) => {
           </Link>
           {/* </button> */}
         </p>
-        <p className="text-sm truncate text-gray-300 mt-1">
+        <p className="text-sm truncate text-gray-300 mt-1 hover:underline hover:text-slate-500 ">
           <Link to={song.artists ? `/artist/${song?.artists[0]?.adamid}` : `/top-artists`} >
             {song.subtitle}
           </Link>

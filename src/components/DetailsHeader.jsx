@@ -4,7 +4,7 @@ import { BiArrowBack } from 'react-icons/bi'
 
 
 const DetailsHeader = ({ songData, artistId, artistData }) => {
-  // console.log(songData)
+  // console.log(artistData.data[0]?.attributes)
   const navigate = useNavigate()
   return (
     <div className="relative w-full flex flex-col">
@@ -21,7 +21,7 @@ const DetailsHeader = ({ songData, artistId, artistData }) => {
         <img
           alt="profile"
           src={
-            artistId ? artistData?.attributes?.artwork?.url
+            artistId ? artistData?.data[0]?.attributes?.artwork?.url
               .replace('{w}', '500')
               .replace('{h}', '500')
               : songData?.images?.coverart
@@ -34,7 +34,7 @@ const DetailsHeader = ({ songData, artistId, artistData }) => {
             {artistId ? artistData?.attributes?.name : songData?.title}
           </p>
           {!artistId && (
-            <Link to={`/artists/${songData?.artists[0]?.adamid}`}>
+            <Link to={`/artist/${songData?.artists[0]?.adamid}`}>
               <p className="text-base text-gray-200 mt-2">{songData?.subtitle}</p>
             </Link>
           )}

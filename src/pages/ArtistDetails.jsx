@@ -2,17 +2,26 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import { Loader, DetailsHeader, Error } from '../components'
 import { useGetArtistDetailsQuery } from '../store/services/shazamCore'
+
 
 const ArtistDetails = () => {
   const { artistId } = useParams()
-  const { data, isFetching, isError } = useGetArtistDetailsQuery(artistId)
+  const {
+    data: artistData,
+    isFetching: isFetchingArtist,
+    isError } = useGetArtistDetailsQuery(artistId)
 
-  if (!isFetching && !isError) console.log(data)
+  if (isFetchingArtist) return <Loader title={'Loading artist details'} />
 
-    return (
-      <div>ArtistDetails</div>
-    )
+  // if (!isFetching && !isError) console.log(data)
+
+  return (
+    <div>
+      <DetailsHeader artistData={artistData} artistId={artistId} />
+    </div>
+  )
 }
 
 export default ArtistDetails

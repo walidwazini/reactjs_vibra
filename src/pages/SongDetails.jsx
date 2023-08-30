@@ -55,14 +55,6 @@ const SongDetails = () => {
         </div>
       </div>
       <div className='flex flex-col m-5' >
-        {/* {recomData && (
-          recomData?.tracks.map((item, i) => (
-            <div className='mt-2 text-white text-xl' key={item?.key}  >
-              <span>{i + 1}</span>
-              <span  >{item?.title}</span>
-            </div>
-          ))
-        )} */}
         {recomData && (
           <RecomSongs
             data={recomData}
