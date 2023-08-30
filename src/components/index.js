@@ -7,5 +7,9 @@ import TopPlay from './TopPlay'
 import MusicPlayer from "./MusicPlayer";
 
 import DetailsHeader from "./DetailsHeader";
+import RecomSongs from "./RecomSongs";
 
-export { SongCard, Loader, Error, Sidebar, MusicPlayer, TopPlay, DetailsHeader }
+export {
+  SongCard, Loader, Error, Sidebar, RecomSongs, 
+  MusicPlayer, TopPlay, DetailsHeader
+}

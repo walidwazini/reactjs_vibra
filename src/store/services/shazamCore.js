@@ -16,7 +16,8 @@ export const shazamCoreApi = createApi({
     getTopSongByGenre: builder.query({ query: (genreTerm) => `/charts/get-top-songs-in_world_by_genre?genre=${genreTerm}&limit=6` }),
     getSongDetails: builder.query({ query: (songId) => `/songs/get_details?id=${songId}` }),
     getRecommendSongs: builder.query({ query: (songId) => `/songs/list-recommendations?id=${songId}&limit=5` }),
-    getArtistDetails: builder.query({query: (artistId) => `/artist/get-details?id=${artistId}`})
+    getArtistDetails: builder.query({query: (artistId) => `/artist/get-details?id=${artistId}`}),
+    getArtistTopSong: builder.query({ query:(artistId) => `/artist/get-top-songs?id=${artistId}&offset=0`})
   })
 })
 
@@ -25,5 +26,6 @@ export const {
   useGetTopSongByGenreQuery,
   useGetSongDetailsQuery,
   useGetRecommendSongsQuery,
-  useGetArtistDetailsQuery
+  useGetArtistDetailsQuery,
+  useGetArtistTopSongQuery,
 } = shazamCoreApi
