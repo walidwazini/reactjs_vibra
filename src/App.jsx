@@ -1,10 +1,9 @@
 import viteLogo from '/vite.svg'
 import { Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { ArtistDetails, Explore, SongDetails } from './pages'
+import { ArtistDetails, Explore, SongDetails,AroundYou } from './pages'
 
 import { Sidebar, MusicPlayer, TopPlay } from './components'
-import AroundYou from './pages/AroundYou'
 
 const App = () => {
   const { activeSong } = useSelector(state => state.player)
