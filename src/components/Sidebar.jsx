@@ -11,8 +11,6 @@ import reactLogo from '../assets/react.svg'
 const allLinks = [
   { name: 'Explore', to: '/', icon: HiOutlineHome },
   { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
-  { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
-  { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
 ]
 
 const AllNavLinks = ({ handleCLick }) => (
@@ -21,6 +19,7 @@ const AllNavLinks = ({ handleCLick }) => (
       <NavLink key={i} to={item.to}
         className={'flex flex-row justify-start items-center my-8 text-sm text-gray-400 hover:text-cyan-400'}
         onClick={() => handleCLick && handleCLick()}
+        style={({ isActive }) => ({ fontWeight: isActive && 'bold', color: isActive && '#13f0f0' })}
       >
         <item.icon className='w-6 h-6 mr-2' />
         {item.name}

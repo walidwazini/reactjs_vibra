@@ -1,3 +1,4 @@
+import SearchBar from "./SearchBar";
 import SongCard from "./SongCard";
 import Loader from "./Loader";
 import Error from './Error'
@@ -10,6 +11,6 @@ import DetailsHeader from "./DetailsHeader";
 import RecomSongs from "./RecomSongs";
 
 export {
-  SongCard, Loader, Error, Sidebar, RecomSongs, 
-  MusicPlayer, TopPlay, DetailsHeader
+  SongCard, Loader, Error, Sidebar, RecomSongs,
+  MusicPlayer, TopPlay, DetailsHeader, SearchBar
 }
