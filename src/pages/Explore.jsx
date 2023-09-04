@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { genres } from '../assets/constants'
 import { useGetTopSongByGenreQuery } from '../store/services/shazamCore'
+import { selectGenreListId } from '../store/features/playerSlice'
 import { SongCard, Loader, Error } from '../components'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Explore = () => {
-  const genreTitle = 'Hip Hop'
   const dispatch = useDispatch()
 
-  const queryResponse = useGetTopSongByGenreQuery('POP')
+  const { activeSong, isPlaying, genreListId } = useSelector(state => state.player || 'POP')
+  const queryResponse = useGetTopSongByGenreQuery(genreListId || 'POP')
   const { data, isFetching, isError } = queryResponse
-  const { activeSong, isPlaying } = useSelector(state => state.player)
+
+  const genreTitle = genres.find(({ value }) => value === genreListId)?.title
 
   if (isFetching) return <Loader title={'Loading songs..'} />
 
@@ -27,6 +29,8 @@ const Explore = () => {
         </h1>
 
         <select
+          onChange={ev => dispatch(selectGenreListId(ev.target.value))}
+          value={genreListId || 'POP'}
           className='bg-black text-gray-400 p-3 text-sm rounded-md outline-none sm:mt-0 mt-5 '
         >
           {genres.map(genre => (
