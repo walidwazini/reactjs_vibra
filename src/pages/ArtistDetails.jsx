@@ -24,11 +24,6 @@ const ArtistDetails = () => {
     <div>
       <DetailsHeader artistData={artistData} artistId={artistId} />
       <div className='mt-10 p-4 flex flex-col text-white' >
-        {/* {topSongsData && topSongsData?.data?.slice(0,6).map((item,i) => (
-          <div key={i} className='mt-2' >
-            {item.id}
-          </div>
-        ))} */}
         {topSongsData && (
           <RecomSongs
             data={topSongsData?.data?.slice(0, 5)}

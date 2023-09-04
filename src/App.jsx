@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { ArtistDetails, Explore, SongDetails } from './pages'
 
 import { Sidebar, MusicPlayer, TopPlay } from './components'
+import AroundYou from './pages/AroundYou'
 
 const App = () => {
   const { activeSong } = useSelector(state => state.player)
@@ -21,6 +22,7 @@ const App = () => {
               <Route path="/" element={<Explore />} />
               <Route path="/songs/:songId" element={<SongDetails />} />
               <Route path='/artist/:artistId' element={<ArtistDetails /> } />
+              <Route path='/around-you' element={<AroundYou />} />
             </Routes>
           </div>
           <div>
