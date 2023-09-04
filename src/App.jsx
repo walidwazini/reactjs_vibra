@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { ArtistDetails, Explore, SongDetails, AroundYou } from './pages'
 
+import { ArtistDetails, Explore, SongDetails, AroundYou, Search } from './pages'
 import { Sidebar, MusicPlayer, TopPlay, SearchBar } from './components'
 
 const App = () => {
@@ -19,6 +19,7 @@ const App = () => {
               <Route path="/songs/:songId" element={<SongDetails />} />
               <Route path='/artist/:artistId' element={<ArtistDetails />} />
               <Route path='/around-you' element={<AroundYou />} />
+              <Route path='/search/:searchTerm' element={<Search />} />
             </Routes>
           </div>
           <div>
